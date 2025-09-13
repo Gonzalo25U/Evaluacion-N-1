@@ -1,0 +1,190 @@
+/* Estilos modernos y futuristas para la tienda de videojuegos */
+:root {
+  --primary-color: #8a2be2;
+  --secondary-color: #00ffff;
+  --accent-color: #ff00ff;
+  --dark-color: #0d0d0d;
+  --light-color: #f5f5f5;
+}
+
+body {
+  font-family: 'Orbitron', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(circle at top left, #0d0d0d 0%, #1a1a2e 100%);
+  color: var(--light-color);
+  min-height: 100vh;
+}
+
+/* Navbar*/
+.navbar-brand {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--accent-color) !important;
+  text-shadow: 0 0 10px var(--accent-color);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px rgba(255,255,255,0.2);
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: var(--secondary-color) !important;
+  text-shadow: 0 0 10px var(--secondary-color);
+}
+
+/* Cards con efecto glassmorphism */
+.card {
+  background: rgba(15,15,25,0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-7px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0,255,255,0.3), 0 0 20px rgba(255,0,255,0.3);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Botones */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border: none;
+  border-radius: 30px;
+  padding: 12px 30px;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--secondary-color);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 0 25px var(--primary-color), 0 0 40px var(--secondary-color);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #00ffcc, #00d4ff);
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0 0 15px #00ffcc, 0 0 25px #00d4ff;
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #ff0066, #ff33cc);
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0 0 15px #ff0066, 0 0 25px #ff33cc;
+}
+
+/* Hero section con efecto neón y glass */
+.hero-section {
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(15px);
+  border-radius: 25px;
+  padding: 4rem;
+  margin: 2rem 0;
+  text-align: center;
+  color: white;
+  box-shadow: 0 0 20px var(--accent-color), 0 0 40px var(--secondary-color);
+}
+
+.section-title {
+  color: var(--accent-color);
+  text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--secondary-color);
+  margin-bottom: 2rem;
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Cards de noticias y juegos */
+.news-card, .game-card {
+  background: rgba(20,20,30,0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--light-color);
+}
+
+/* Etiqueta de precio*/
+.price-tag {
+  background: linear-gradient(135deg, var(--accent-color), #ff00ff);
+  color: white;
+  padding: 6px 18px;
+  border-radius: 25px;
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--accent-color);
+}
+
+/* Contactos */
+.contact-form {
+  background: rgba(20,20,30,0.7);
+  backdrop-filter: blur(15px);
+  padding: 2.5rem;
+  border-radius: 25px;
+  box-shadow: 0 0 20px var(--secondary-color);
+}
+
+/* Modal con bordes redondeados */
+.modal-content {
+  border-radius: 20px;
+  border: none;
+  background: rgba(15,15,25,0.8);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 20px var(--primary-color);
+}
+
+/* Items del carrito */
+.cart-item {
+  background: rgba(138, 43, 226, 0.1);
+  border-radius: 15px;
+  margin-bottom: 10px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0,255,255,0.2);
+  color: var(--light-color);
+}
+
+/* Spinner*/
+.loading-spinner {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: 3px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  border-top-color: var(--accent-color);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Notificaciones*/
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.3s ease;
+  background: rgba(20,20,30,0.9);
+  color: var(--light-color);
+  padding: 15px 25px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px var(--accent-color);
+}
+
+.notification.show {
+  opacity: 1;
+  transform: translateX(0);
+}

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameZone - Tienda y Noticias de Videojuegos</title>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">🎮 GameZone</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item"><a class="nav-link" href="#noticias">Noticias</a></li>
+            <li class="nav-item"><a class="nav-link" href="#catalogo">Juegos</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#carritoModal">
+                🛒 Carrito <span id="cartCount" class="badge bg-danger">0</span>
+              </a>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav ms-auto" id="authLinks">
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#authModal" id="btnLogin">Iniciar Sesión</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#authModal" id="btnRegistro">Registrarse</a>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav ms-auto d-none" id="userMenu">
+            <li class="nav-item">
+              <span class="nav-link" id="welcomeMsg"></span>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-danger" href="#" id="btnLogout">Cerrar Sesión</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <div class="container">
+    <div class="hero-section">
+      <h1 class="display-4 mb-4">¡Bienvenido a GameZone! 🎮</h1>
+      <p class="lead">Tu destino definitivo para las últimas noticias de videojuegos y los mejores títulos del mercado</p>
+      <a href="#catalogo" class="btn btn-primary btn-lg me-3">Ver Juegos</a>
+      <a href="#noticias" class="btn btn-outline-light btn-lg">Leer Noticias</a>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main class="container my-5">
+    <!-- NOTICIAS -->
+    <section id="noticias">
+      <h2 class="mb-4 text-center section-title">📰 Últimas Noticias</h2>
+      <div id="contenedorNoticias" class="row">
+        <div class="col-12 text-center">
+          <div class="loading-spinner"></div>
+          <p class="text-white ms-3">Cargando noticias...</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="my-5 text-white">
+
+    <!-- JUEGOS -->
+    <section id="catalogo">
+      <h2 class="mb-4 text-center section-title">🎮 Catálogo de Juegos</h2>
+      <div id="contenedorJuegos" class="row">
+        <div class="col-12 text-center">
+          <div class="loading-spinner"></div>
+          <p class="text-white ms-3">Cargando juegos...</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="my-5 text-white">
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <h2 class="mb-4 text-center section-title">📞 Contáctanos</h2>
+      <div class="contact-form col-md-8 mx-auto">
+        <form id="formContacto">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="nombre" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="email" class="form-label">Correo Electrónico</label>
+              <input type="email" class="form-control" id="email" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="asunto" class="form-label">Asunto</label>
+            <input type="text" class="form-control" id="asunto" required>
+          </div>
+          <div class="mb-3">
+            <label for="mensaje" class="form-label">Mensaje</label>
+            <textarea class="form-control" id="mensaje" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-success w-100">
+            <span id="btnContactText">Enviar Mensaje</span>
+            <span id="btnContactSpinner" class="loading-spinner d-none ms-2"></span>
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL CARRITO -->
+  <div class="modal fade" id="carritoModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">🛒 Carrito de Compras</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="carritoVacio" class="text-center py-4">
+            <h4 class="text-muted">Tu carrito está vacío</h4>
+            <p>¡Agrega algunos juegos increíbles!</p>
+          </div>
+          <ul id="listaCarrito" class="list-group mb-3 d-none"></ul>
+          <div id="carritoTotal" class="d-none">
+            <hr>
+            <p class="text-end fw-bold fs-4" id="totalCarrito">Total: $0.00</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger" id="vaciarCarrito" disabled>Vaciar Carrito</button>
+          <button class="btn btn-success" id="finalizarCompra" disabled>Finalizar Compra</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL LOGIN / REGISTRO -->
+  <div class="modal fade" id="authModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content" id="modalAuthContent">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="authModalTitle">Iniciar Sesión</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="authForm">
+            <div class="mb-3" id="nombreField" style="display: none;">
+              <label for="authNombre" class="form-label">Nombre Completo</label>
+              <input type="text" class="form-control" id="authNombre">
+            </div>
+            <div class="mb-3">
+              <label for="authEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="authEmail" required>
+            </div>
+            <div class="mb-3">
+              <label for="authPassword" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="authPassword" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100" id="authSubmit">Iniciar Sesión</button>
+          </form>
+          <hr>
+          <p class="text-center mb-0">
+            <span id="authSwitchText">¿No tienes cuenta?</span>
+            <a href="#" id="authSwitchLink">Regístrate aquí</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+      <p>&copy; 2025 GameZone. Todos los derechos reservados.</p>
+      <p class="mb-0">🎮 La mejor experiencia gaming está aquí 🎮</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="js/aunth.js"></script>
+  <script src="js/carrito.js"></script>
+  <script src="js/contactos.js"></script>
+  <script src="js/juegos.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/noticias.js"></script>
+</body>
+</html>
