@@ -1,4 +1,3 @@
-
     // Sistema de autenticación
     function cambiarModoAuth() {
       isLoginMode = !isLoginMode;
