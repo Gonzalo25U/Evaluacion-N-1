@@ -1,3 +1,5 @@
+// juegos.js
+
 // Datos de ejemplo con información extendida
     const juegosData = [
       {
@@ -62,136 +64,123 @@
       }
     ];
 
-    // Estado global
-    let carrito = [];
-    let usuario = null;
-    let isLoginMode = true;
+// Funciones de utilidad (sin redeclarar carrito ni usuario)
+function mostrarNotificacion(mensaje, tipo = 'success') {
+  const notification = document.createElement('div');
+  notification.className = `alert alert-${tipo} notification`;
+  notification.textContent = mensaje;
+  document.body.appendChild(notification);
 
-    // Funciones de utilidad
-    function mostrarNotificacion(mensaje, tipo = 'success') {
-      const notification = document.createElement('div');
-      notification.className = `alert alert-${tipo} notification`;
-      notification.textContent = mensaje;
-      document.body.appendChild(notification);
-      
-      setTimeout(() => notification.classList.add('show'), 100);
-      setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => document.body.removeChild(notification), 300);
-      }, 3000);
-    }
+  setTimeout(() => notification.classList.add('show'), 100);
+  setTimeout(() => {
+    notification.classList.remove('show');
+    setTimeout(() => document.body.removeChild(notification), 300);
+  }, 3000);
+}
 
-    function actualizarContadorCarrito() {
-      document.getElementById('cartCount').textContent = carrito.length;
-    }
+// Contador de carrito actualizado desde carrito.js
+function actualizarContadorCarrito() {
+  if (!window.carrito) return;
+  document.getElementById('cartCount').textContent = carrito.reduce((total, item) => total + item.cantidad, 0);
+}
 
-    // Cargar juegos
-    function cargarJuegos() {
-      setTimeout(() => {
-        const contenedor = document.getElementById('contenedorJuegos');
-        contenedor.innerHTML = '';
-        
-        juegosData.forEach(juego => {
-          const col = document.createElement('div');
-          col.className = 'col-md-6 col-lg-3 mb-4';
-          col.innerHTML = `
-            <div class="card game-card h-100">
-              <img src="${juego.imagen}" class="card-img-top" alt="${juego.nombre}" 
-                   style="cursor: pointer;" onclick="mostrarDetalleJuego(${juego.id})">
-              <div class="card-body d-flex flex-column">
-                <h5 class="card-title">${juego.nombre}</h5>
-                <p class="card-text flex-grow-1">${juego.descripcion}</p>
-                <div class="mt-auto">
-                  <div class="d-flex justify-content-between align-items-center mb-2">
-                    <span class="price-tag">$${juego.precio}</span>
-                    <div class="rating">
-                      ${'★'.repeat(Math.floor(juego.calificacion))}${'☆'.repeat(5-Math.floor(juego.calificacion))}
-                      <small>(${juego.calificacion})</small>
-                    </div>
-                  </div>
-                  <button class="btn btn-primary w-100" onclick="agregarAlCarrito(${juego.id})">
-                    › Agregar al Carrito
-                  </button>
+// Cargar juegos en la página
+function cargarJuegos() {
+  setTimeout(() => {
+    const contenedor = document.getElementById('contenedorJuegos');
+    if (!contenedor) return;
+    contenedor.innerHTML = '';
+
+    juegosData.forEach(juego => {
+      const col = document.createElement('div');
+      col.className = 'col-md-6 col-lg-3 mb-4';
+      col.innerHTML = `
+        <div class="card game-card h-100">
+          <img src="${juego.imagen}" class="card-img-top" alt="${juego.nombre}" 
+               style="cursor: pointer;" onclick="mostrarDetalleJuego(${juego.id})">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">${juego.nombre}</h5>
+            <p class="card-text flex-grow-1">${juego.descripcion}</p>
+            <div class="mt-auto">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="price-tag">$${juego.precio}</span>
+                <div class="rating">
+                  ${'★'.repeat(Math.floor(juego.calificacion))}${'☆'.repeat(5-Math.floor(juego.calificacion))}
+                  <small>(${juego.calificacion})</small>
                 </div>
               </div>
-            </div>
-          `;
-          contenedor.appendChild(col);
-        });
-      }, 1200);
-    }
-
-    // Función para mostrar detalles del juego
-    function mostrarDetalleJuego(juegoId) {
-      const juego = juegosData.find(j => j.id === juegoId);
-      if (!juego) return;
-
-      const modalContent = `
-        <div class="modal fade" id="detalleJuegoModal" tabindex="-1">
-          <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-              <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title">${juego.nombre}</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-6">
-                    <img src="${juego.imagen}" alt="${juego.nombre}" class="img-fluid rounded mb-3">
-                    <div class="game-info">
-                      <p><strong>Desarrollador:</strong> ${juego.desarrollador}</p>
-                      <p><strong>Género:</strong> ${juego.genero}</p>
-                      <p><strong>Fecha de lanzamiento:</strong> ${new Date(juego.fechaLanzamiento).toLocaleDateString('es-ES')}</p>
-                      <p><strong>Plataformas:</strong> ${juego.plataformas.join(', ')}</p>
-                      <p><strong>Calificación:</strong> 
-                        <span class="rating">
-                          ${'★'.repeat(Math.floor(juego.calificacion))}${'☆'.repeat(5-Math.floor(juego.calificacion))}
-                          (${juego.calificacion}/5)
-                        </span>
-                      </p>
-                      <p><strong>Requisitos mínimos:</strong> ${juego.requisitos}</p>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="ratio ratio-16x9 mb-3">
-                      <iframe src="${juego.trailer}" title="Trailer ${juego.nombre}" allowfullscreen></iframe>
-                    </div>
-                    <h6>Descripción:</h6>
-                    <p>${juego.descripcionDetallada}</p>
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <div class="d-flex justify-content-between align-items-center w-100">
-                  <span class="price-tag fs-4">$${juego.precio}</span>
-                  <div>
-                    <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success" onclick="agregarAlCarrito(${juego.id})">
-                       Agregar al Carrito - $${juego.precio}
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <button class="btn btn-primary w-100" onclick="agregarAlCarrito(${juego.id})">
+                › Agregar al Carrito
+              </button>
             </div>
           </div>
         </div>
       `;
+      contenedor.appendChild(col);
+    });
+  }, 0);
+}
 
-      // Eliminar modal anterior si existe
-      const existingModal = document.getElementById('detalleJuegoModal');
-      if (existingModal) {
-        existingModal.remove();
-      }
+// Mostrar detalle del juego en modal
+function mostrarDetalleJuego(juegoId) {
+  const juego = juegosData.find(j => j.id === juegoId);
+  if (!juego) return;
 
-      // Agregar el nuevo modal al DOM
-      document.body.insertAdjacentHTML('beforeend', modalContent);
-      
-      // Mostrar el modal
-      const modal = new bootstrap.Modal(document.getElementById('detalleJuegoModal'));
-      modal.show();
+  const modalContent = `
+    <div class="modal fade" id="detalleJuegoModal" tabindex="-1">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">${juego.nombre}</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6">
+                <img src="${juego.imagen}" alt="${juego.nombre}" class="img-fluid rounded mb-3">
+                <div class="game-info">
+                  <p><strong>Desarrollador:</strong> ${juego.desarrollador}</p>
+                  <p><strong>Género:</strong> ${juego.genero}</p>
+                  <p><strong>Fecha de lanzamiento:</strong> ${new Date(juego.fechaLanzamiento).toLocaleDateString('es-ES')}</p>
+                  <p><strong>Plataformas:</strong> ${juego.plataformas.join(', ')}</p>
+                  <p><strong>Calificación:</strong> ${juego.calificacion}/5</p>
+                  <p><strong>Requisitos mínimos:</strong> ${juego.requisitos}</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="ratio ratio-16x9 mb-3">
+                  <iframe src="${juego.trailer}" title="Trailer ${juego.nombre}" allowfullscreen></iframe>
+                </div>
+                <h6>Descripción:</h6>
+                <p>${juego.descripcionDetallada}</p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="d-flex justify-content-between align-items-center w-100">
+              <span class="price-tag fs-4">$${juego.precio}</span>
+              <div>
+                <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success" onclick="agregarAlCarrito(${juego.id})">
+                   Agregar al Carrito - $${juego.precio}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
 
-      // Limpiar el modal cuando se cierre
-      document.getElementById('detalleJuegoModal').addEventListener('hidden.bs.modal', function() {
-        this.remove();
-      });
-    }
+  const existingModal = document.getElementById('detalleJuegoModal');
+  if (existingModal) existingModal.remove();
+
+  document.body.insertAdjacentHTML('beforeend', modalContent);
+
+  const modal = new bootstrap.Modal(document.getElementById('detalleJuegoModal'));
+  modal.show();
+
+  document.getElementById('detalleJuegoModal').addEventListener('hidden.bs.modal', function() {
+    this.remove();
+  });
+}
