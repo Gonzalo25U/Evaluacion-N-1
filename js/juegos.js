@@ -91,6 +91,8 @@ function cargarJuegos() {
     if (!contenedor) return;
     contenedor.innerHTML = '';
 
+
+
     juegosData.forEach(juego => {
       const col = document.createElement('div');
       col.className = 'col-md-6 col-lg-3 mb-4';

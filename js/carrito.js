@@ -77,25 +77,32 @@ function disminuirCantidad(juegoId) {
   }
 }
 
-// Vaciar carrito
-function vaciarCarrito() {
-  if (carrito.length > 0) {
-    const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
-    carrito = [];
-    guardarCarrito();
-    actualizarContadorCarrito();
-    actualizarVistaCarrito();
-    mostrarNotificacion(`Carrito vaciado (${totalItems} items eliminados)`, 'info');
+// Función para vaciar carrito
+function vaciarCarritoSimple() {
+  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  if (carrito.length === 0) {
+    alert("El carrito ya está vacío");
+    return;
   }
+  
+  localStorage.setItem('carrito', JSON.stringify([]));
+  document.getElementById('cartCount').textContent = 0;
+  alert(`Carrito vaciado (${carrito.length} items eliminados)`);
+  // Si tienes un render de la vista del carrito, llamalo aquí:
+  if (typeof actualizarVistaCarrito === 'function') actualizarVistaCarrito();
 }
 
-// Finalizar compra
-function finalizarCompra() {
-  if (carrito.length === 0) return;
+// Función para finalizar compra
+function finalizarCompraSimple() {
+  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  if (carrito.length === 0) {
+    alert("No hay productos en el carrito");
+    return;
+  }
 
   const usuario = JSON.parse(localStorage.getItem('usuarioActivo'));
   if (!usuario) {
-    mostrarNotificacion('Debes iniciar sesión para finalizar la compra', 'warning');
+    alert("Debes iniciar sesión para finalizar la compra");
     document.getElementById('btnLogin').click();
     return;
   }
@@ -103,34 +110,24 @@ function finalizarCompra() {
   const total = carrito.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
   const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
 
-  if (typeof usuariosDB !== 'undefined') {
-    const usuarioEnDB = usuariosDB.find(u => u.id === usuario.id);
-    if (usuarioEnDB) {
-      const compra = {
-        fecha: new Date().toISOString().split('T')[0],
-        items: carrito.map(item => ({
-          juegoId: item.id,
-          nombre: item.nombre,
-          precio: item.precio,
-          cantidad: item.cantidad,
-          subtotal: item.precio * item.cantidad
-        })),
-        total,
-        totalItems
-      };
-      usuarioEnDB.compras.push(compra);
-      localStorage.setItem('usuarios', JSON.stringify(usuariosDB));
-    }
+  alert(`¡Compra finalizada! ${totalItems} items por $${total.toFixed(2)}`);
+
+  localStorage.setItem('carrito', JSON.stringify([]));
+  document.getElementById('cartCount').textContent = 0;
+  if (typeof actualizarVistaCarrito === 'function') actualizarVistaCarrito();
+
+  // Cerrar modal si existe
+  const modal = document.getElementById('carritoModal');
+  if (modal) {
+    const bootstrapModal = bootstrap.Modal.getInstance(modal);
+    if (bootstrapModal) bootstrapModal.hide();
   }
-
-  mostrarNotificacion(`¡Compra finalizada! ${totalItems} items por $${total.toFixed(2)} 🎉`, 'success');
-
-  carrito = [];
-  guardarCarrito();
-  actualizarContadorCarrito();
-  actualizarVistaCarrito();
-  bootstrap.Modal.getInstance(document.getElementById('carritoModal')).hide();
 }
+
+// Asociar botones
+document.getElementById('vaciarCarrito')?.addEventListener('click', vaciarCarritoSimple);
+document.getElementById('finalizarCompra')?.addEventListener('click', finalizarCompraSimple);
+
 
 // Actualizar vista del carrito
 function actualizarVistaCarrito() {
@@ -140,7 +137,8 @@ function actualizarVistaCarrito() {
   const totalCarrito = document.getElementById('totalCarrito');
   const vaciarBtn = document.getElementById('vaciarCarrito');
   const finalizarBtn = document.getElementById('finalizarCompra');
-
+  // Dentro de actualizarVistaCarrito()
+carrito = JSON.parse(localStorage.getItem('carrito')) || [];
   if (carrito.length === 0) {
     carritoVacio.classList.remove('d-none');
     listaCarrito.classList.add('d-none');

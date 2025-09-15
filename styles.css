@@ -197,3 +197,30 @@ body {
   opacity: 1;
   transform: translateX(0);
 }
+.imagen{
+  width: 70px;
+  height: 70px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+/* Contenedor de redes sociales */
+.redes {
+  display: flex;
+  justify-content: end;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+/* Estilo de los íconos */
+.redes img {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s, filter 0.3s;
+  cursor: pointer;
+}
+
+/* Efecto al pasar el mouse */
+.redes img:hover {
+  transform: scale(1.2);
+  filter: brightness(1.5);
+}

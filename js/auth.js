@@ -3,8 +3,8 @@ let usuariosDB = [
   {
     id: 1,
     nombre: "Admin",
-    email: "admin@admin.com", // ← correo del admin
-    password: "1234",        // ← contraseña del admin
+    email: "admin@admin.com", 
+    password: "1234",      
     rol: "admin",
     fechaRegistro: "2025-01-01",
     activo: true,

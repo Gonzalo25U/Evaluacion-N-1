@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Carga inicial de noticias y juegos
+  // Carga inicial de noticias y juegos (página principal)
   cargarNoticias();
   cargarJuegos();
 
@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const authForm = document.getElementById('authForm');
   const btnLogout = document.getElementById('btnLogout');
 
-  if (authSwitchLink) authSwitchLink.addEventListener('click', cambiarModoAuth);
+
+  
   if (authForm) authForm.addEventListener('submit', procesarAuth);
   if (btnLogout) btnLogout.addEventListener('click', cerrarSesion);
 
@@ -40,6 +41,9 @@ document.addEventListener('DOMContentLoaded', function() {
       if (target) target.scrollIntoView({ behavior: 'smooth' });
     });
   });
+
+  // Mostrar opciones de admin si corresponde
+  mostrarOpcionesAdmin();
 });
 
 // Forzar modo login o registro al abrir modal
@@ -69,3 +73,14 @@ function cambiarAModoRegistro() {
   authSwitchText.textContent = "¿Ya tienes cuenta?";
   authSwitchLink.textContent = "Inicia sesión aquí";
 }
+
+// Inicializar panel admin si el usuario activo es admin
+function initAdminPanel() {
+  const usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+  if (usuarioActivo && usuarioActivo.rol === 'admin') {
+    mostrarOpcionesAdmin();
+  }
+}
+
+// Llamada inicial para admin
+initAdminPanel();
