@@ -1,5 +1,4 @@
 // carrito.js - Sistema de carrito con cantidades y persistencia
-
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
 // Agregar un juego al carrito

@@ -1,10 +1,4 @@
-// ==========================
-// admin.js - Panel de Administración Completo
-// ==========================
-
-// ==========================
-// Inicializar usuarios y juegos
-// ==========================
+// Inicializar usuarios y juegos en localStorage si no existen
 (function inicializarDatos() {
   // Admin inicial obligatorio
   let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
@@ -32,9 +26,7 @@
   }
 })();
 
-// ==========================
 // Mostrar opciones de admin en el menú
-// ==========================
 function mostrarOpcionesAdmin() {
   const user = JSON.parse(localStorage.getItem("usuarioActivo"));
   if (!user || user.rol !== "admin") return; // Solo admin
@@ -51,9 +43,8 @@ function mostrarOpcionesAdmin() {
   userMenu.insertBefore(adminBtn, userMenu.lastElementChild);
 }
 
-// ==========================
+
 // Ocultar opciones admin
-// ==========================
 function ocultarOpcionesAdmin() {
   const btnAdminPanel = document.getElementById('btnAdminPanel');
   if (btnAdminPanel) btnAdminPanel.parentElement.remove();
@@ -70,9 +61,7 @@ function togglePanelAdmin() {
   else mostrarPanelAdmin();
 }
 
-// ==========================
 // Mostrar panel de administración
-// ==========================
 function mostrarPanelAdmin() {
   const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
   const juegos = JSON.parse(localStorage.getItem("juegos")) || [];
@@ -137,9 +126,8 @@ function mostrarPanelAdmin() {
   document.body.insertAdjacentHTML('beforeend', panelHTML);
 }
 
-// ==========================
+
 // CRUD Usuarios
-// ==========================
 function mostrarListaUsuarios() {
   // Tomar todos los usuarios: admin inicial + registrados
   let usuarios = JSON.parse(localStorage.getItem("usuarios")) || []; // admin y usuarios creados en admin
@@ -183,7 +171,7 @@ function mostrarListaUsuarios() {
   document.getElementById("adminContent").innerHTML = listaHTML;
 }
 
-
+// Crear nuevo usuario
 function crearUsuario() {
   const nombre = prompt("Nombre del usuario:");
   const email = prompt("Email:");
@@ -197,7 +185,7 @@ function crearUsuario() {
   localStorage.setItem("usuarios", JSON.stringify(usuarios));
   mostrarListaUsuarios();
 }
-
+// Editar usuario
 function editarUsuario(index) {
   let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
   const u = usuarios[index];
@@ -212,7 +200,7 @@ function editarUsuario(index) {
   localStorage.setItem("usuarios", JSON.stringify(usuarios));
   mostrarListaUsuarios();
 }
-
+// Eliminar usuario
 function eliminarUsuario(index) {
   let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
   const u = usuarios[index];
@@ -228,9 +216,9 @@ function eliminarUsuario(index) {
   mostrarListaUsuarios();
 }
 
-// ==========================
+
 // CRUD Juegos
-// ==========================
+// mostrar lista de juegos
 function mostrarListaJuegos() {
   let juegos = JSON.parse(localStorage.getItem("juegos")) || [];
 
@@ -264,7 +252,7 @@ function mostrarListaJuegos() {
 
   document.getElementById("adminContent").innerHTML = listaHTML;
 }
-
+// crear juego
 function crearJuego() {
   const nombre = prompt("Nombre del juego:");
   const precio = parseFloat(prompt("Precio:"));
@@ -275,7 +263,7 @@ function crearJuego() {
   localStorage.setItem("juegos", JSON.stringify(juegos));
   mostrarListaJuegos();
 }
-
+// editar juego
 function editarJuego(index) {
   let juegos = JSON.parse(localStorage.getItem("juegos")) || [];
   const j = juegos[index];
@@ -288,7 +276,7 @@ function editarJuego(index) {
   localStorage.setItem("juegos", JSON.stringify(juegos));
   mostrarListaJuegos();
 }
-
+// eliminar juego
 function eliminarJuego(index) {
   if (!confirm("¿Deseas eliminar este juego?")) return;
   let juegos = JSON.parse(localStorage.getItem("juegos")) || [];
@@ -297,9 +285,7 @@ function eliminarJuego(index) {
   mostrarListaJuegos();
 }
 
-// ==========================
 // Cerrar panel
-// ==========================
 function cerrarPanelAdmin() {
   const panel = document.getElementById('adminPanel');
   if (panel) panel.remove();
