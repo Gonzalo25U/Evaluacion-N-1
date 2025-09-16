@@ -1,10 +1,4 @@
-// ==========================
-// admin.js - Panel de Administración Completo
-// ==========================
-
-// ==========================
 // Inicializar usuarios y juegos
-// ==========================
 (function inicializarDatos() {
   // Admin inicial obligatorio
   let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
@@ -32,9 +26,7 @@
   }
 })();
 
-// ==========================
 // Mostrar opciones de admin en el menú
-// ==========================
 function mostrarOpcionesAdmin() {
   const user = JSON.parse(localStorage.getItem("usuarioActivo"));
   if (!user || user.rol !== "admin") return; // Solo admin
@@ -51,9 +43,8 @@ function mostrarOpcionesAdmin() {
   userMenu.insertBefore(adminBtn, userMenu.lastElementChild);
 }
 
-// ==========================
+
 // Ocultar opciones admin
-// ==========================
 function ocultarOpcionesAdmin() {
   const btnAdminPanel = document.getElementById('btnAdminPanel');
   if (btnAdminPanel) btnAdminPanel.parentElement.remove();
@@ -61,18 +52,16 @@ function ocultarOpcionesAdmin() {
   if (panel) panel.remove();
 }
 
-// ==========================
+
 // Toggle panel de administración
-// ==========================
 function togglePanelAdmin() {
   const panel = document.getElementById('adminPanel');
   if (panel) panel.scrollIntoView({ behavior: 'smooth' });
   else mostrarPanelAdmin();
 }
 
-// ==========================
+
 // Mostrar panel de administración
-// ==========================
 function mostrarPanelAdmin() {
   const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
   const juegos = JSON.parse(localStorage.getItem("juegos")) || [];
@@ -137,9 +126,8 @@ function mostrarPanelAdmin() {
   document.body.insertAdjacentHTML('beforeend', panelHTML);
 }
 
-// ==========================
+
 // CRUD Usuarios
-// ==========================
 function mostrarListaUsuarios() {
   // Tomar todos los usuarios: admin inicial + registrados
   let usuarios = JSON.parse(localStorage.getItem("usuarios")) || []; // admin y usuarios creados en admin
@@ -228,9 +216,9 @@ function eliminarUsuario(index) {
   mostrarListaUsuarios();
 }
 
-// ==========================
+
 // CRUD Juegos
-// ==========================
+
 function mostrarListaJuegos() {
   let juegos = JSON.parse(localStorage.getItem("juegos")) || [];
 
@@ -297,9 +285,8 @@ function eliminarJuego(index) {
   mostrarListaJuegos();
 }
 
-// ==========================
+
 // Cerrar panel
-// ==========================
 function cerrarPanelAdmin() {
   const panel = document.getElementById('adminPanel');
   if (panel) panel.remove();
