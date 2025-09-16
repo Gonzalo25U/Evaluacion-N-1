@@ -162,7 +162,7 @@ body {
   padding: 1rem 0;
 }
 
-/* Spinner */
+/* Spinner (barrita de carga)*/
 .loading-spinner {
   display: inline-block;
   width: 22px;
@@ -197,6 +197,7 @@ body {
   opacity: 1;
   transform: translateX(0);
 }
+/* logo */
 .imagen{
   width: 70px;
   height: 70px;
@@ -231,10 +232,4 @@ body {
 .redes img:hover {
   transform: scale(1.2);
   filter: brightness(1.5);
-}
-.row g-4{
-  color: red;
-}
-.card.game-card .card-body {
-  color: #ffffff !important;
 }
