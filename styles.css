@@ -1,10 +1,10 @@
-/* Estilos modernos y futuristas en tonos celestes */
+/* Estilos editados */
 :root {
-  --primary-color: #00c6ff;   /* celeste brillante */
-  --secondary-color: #00e6e6; /* aqua neón */
-  --accent-color: #66ffff;    /* azul hielo */
-  --dark-color: #0a0f1e;      /* azul muy oscuro */
-  --light-color: #e0f7ff;     /* blanco celeste */
+  --primary-color: #00c6ff;  
+  --secondary-color: #00e6e6; 
+  --accent-color: #66ffff;   
+  --dark-color: #0a0f1e;    
+  --light-color: #e0f7ff;     
 }
 
 body {
@@ -33,7 +33,7 @@ body {
   text-shadow: 0 0 12px var(--secondary-color);
 }
 
-/* Cards con efecto glassmorphism */
+/* Cards*/
 .card {
   background: rgba(10, 25, 40, 0.6);
   backdrop-filter: blur(14px);
@@ -162,7 +162,7 @@ body {
   padding: 1rem 0;
 }
 
-/* Spinner */
+/* Spinner (barrita de carga)*/
 .loading-spinner {
   display: inline-block;
   width: 22px;
@@ -197,11 +197,20 @@ body {
   opacity: 1;
   transform: translateX(0);
 }
+/* logo */
 .imagen{
   width: 70px;
   height: 70px;
   margin-right: 10px;
   vertical-align: middle;
+}
+/* footer */
+.pie{
+  background: var(--dark-color);
+  color: var(--light-color);
+  padding: 20px 0;
+  text-align: center;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
 }
 /* Contenedor de redes sociales */
 .redes {

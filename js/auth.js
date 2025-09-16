@@ -93,7 +93,7 @@ authForm.addEventListener("submit", (e) => {
     }
 
   } else {
-    // --- REGISTRO ---
+    // registro
     if (!nombre || !email || !password) {
       alert("Por favor completa todos los campos");
       return;

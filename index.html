@@ -6,15 +6,18 @@
   <title>GameZone - Tienda y Noticias de Videojuegos</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
   <link rel="stylesheet" href="styles.css">
   <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/7304/7304451.png" type="image/x-icon">
 </head>
 <body>
-  <!-- NAVBAR -->
+  <!-- Navbar (barra superior donde estan las funciones de la web) -->
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-        <a class="navbar-brand" href="#"> <img class="imagen" src="imagen/logo.png" alt=""> GameZone</a>
+        <a class="navbar-brand" href="#">
+          <img class="imagen" src="imagen/logo.png" alt="logo"> GameZone
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,6 +25,7 @@
           <ul class="navbar-nav me-auto">
             <li class="nav-item"><a class="nav-link" href="#noticias">Noticias</a></li>
             <li class="nav-item"><a class="nav-link" href="#catalogo">Juegos</a></li>
+            <li class="nav-item"><a class="nav-link" href="#catalogoProductosSection">Catálogo de Productos</a></li>
             <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
             <li class="nav-item">
               <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#carritoModal">
@@ -52,7 +56,7 @@
     </nav>
   </header>
 
-  <!-- HERO SECTION -->
+  <!-- Hero(Seccion de bienvenida) -->
   <div class="container">
     <div class="hero-section">
       <h1 class="display-4 mb-4">¡Bienvenido a GameZone! <img src="imagen/logo.png" alt="logo" class="imagen"></h1>
@@ -62,9 +66,8 @@
     </div>
   </div>
 
-  <!-- MAIN -->
   <main class="container my-5">
-    <!-- NOTICIAS -->
+    <!-- noticias -->
     <section id="noticias">
       <h2 class="mb-4 text-center section-title">📰 Últimas Noticias</h2>
       <div id="contenedorNoticias" class="row">
@@ -77,8 +80,8 @@
 
     <hr class="my-5 text-white">
 
-    <!-- JUEGOS -->
-    <section id="catalogo"> 
+    <!-- juegos destacados -->
+    <section id="catalogo">
       <h2 class="mb-4 text-center section-title">Juegos Destacados</h2>
       <div id="contenedorJuegos" class="row">
         <div class="col-12 text-center">
@@ -90,9 +93,21 @@
 
     <hr class="my-5 text-white">
 
-    <!-- CONTACTO -->
+    <!-- catalogo -->
+    <section id="catalogoProductosSection" class="my-5">
+      <div class="container">
+        <h2 class="text-center mb-4">🛒 Catálogo de Productos</h2>
+        <div id="catalogoProductos" class="row g-4" >
+          <!-- Los productos se cargarán aquí dinámicamente -->
+        </div>
+      </div>
+    </section>
+
+    <hr class="my-5 text-white">
+
+    <!-- contacto -->
     <section id="contacto">
-      <h2 class="mb-4 text-center section-title">📞 Contáctanos</h2>
+      <h2 class="mb-4 text-center section-title" >📞 Contáctanos</h2>
       <div class="contact-form col-md-8 mx-auto">
         <form id="formContacto">
           <div class="row">
@@ -122,7 +137,7 @@
     </section>
   </main>
 
-  <!-- MODAL CARRITO -->
+  <!-- modal carrito -->
   <div class="modal fade" id="carritoModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -149,7 +164,7 @@
     </div>
   </div>
 
-  <!-- LOGIN / REGISTRO -->
+  <!-- Login/registro -->
   <div class="modal fade" id="authModal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content" id="modalAuthContent">
@@ -184,35 +199,30 @@
   </div>
 
   <!-- Footer -->
-  <footer class="bg-dark text-white py-4 mt-5">
+  <footer class="pie mt-5">
     <div class="container text-center">
       <p>&copy; 2025 GameZone. Todos los derechos reservados.</p>
       <p class="mb-0">🎮 La mejor experiencia gaming está aquí 🎮</p>
     </div>
-
-  <div class="redes">
-      <p >Síguenos en nuestras redes sociales:</p>
-    <!-- Twitter -->
-    <a href="https://twitter.com" target="_blank" rel="noopener">
-      <img src="https://images.vexels.com/media/users/3/137419/isolated/preview/b1a3fab214230557053ed1c4bf17b46c-twitter-icon-logo.png" alt="Twitter" width="30">
-    </a>
-    <!-- Facebook -->
-    <a href="https://facebook.com" target="_blank" rel="noopener">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" width="30">
-    </a>
-    <!-- Instagram -->
-    <a href="https://instagram.com" target="_blank" rel="noopener">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram" width="30">
-    </a>
-  </div>
-</footer>
+    <!-- Redes sociales -->
+    <div class="redes text-center mt-3">
+      <p>Síguenos en nuestras redes sociales:</p>
+      <a href="https://twitter.com" target="_blank" rel="noopener">
+        <img src="https://images.vexels.com/media/users/3/137419/isolated/preview/b1a3fab214230557053ed1c4bf17b46c-twitter-icon-logo.png" alt="Twitter" width="30">
+      </a>
+      <a href="https://facebook.com" target="_blank" rel="noopener">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" width="30">
+      </a>
+      <a href="https://instagram.com" target="_blank" rel="noopener">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram" width="30">
+      </a>
+    </div>
   </footer>
 
-  <!-- SCRIPTS: orden correcto -->
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   
-  <!-- Tus scripts: orden importante -->
+  <!-- Scripts -->
   <script src="js/juegos.js"></script>
   <script src="js/carrito.js"></script>
   <script src="js/auth.js"></script>
@@ -220,5 +230,6 @@
   <script src="js/contactos.js"></script>
   <script src="js/noticias.js"></script>
   <script src="js/main.js"></script>
+
 </body>
 </html>

@@ -77,7 +77,7 @@ function cargarNoticias() {
             </div>
             <h5 class="card-title">${noticia.titulo}</h5>
             <p class="card-text flex-grow-1">${noticia.contenido}</p>
-            <div class="mt-auto">
+            <div class="mt-auto"style="color:white ;>
               <small class="text-muted">
                 "… ${new Date(noticia.fecha).toLocaleDateString('es-ES')} • 
                 Por ${noticia.autor}
@@ -121,9 +121,9 @@ function mostrarDetalleNoticia(noticiaId) {
             <div class="row">
               <div class="col-md-8">
                 <div class="article-content">
-                  <div class="mb-3">
-                    <small class="text-muted">
-                      <strong>Publicado:</strong> ${new Date(noticia.fecha).toLocaleDateString('es-ES', {
+                  <div class="mb-3"style="color:white ;>
+                    <small class="text-muted" >
+                      <strong >Publicado:</strong> ${new Date(noticia.fecha).toLocaleDateString('es-ES', {
                         weekday: 'long',
                         year: 'numeric',
                         month: 'long',
@@ -152,7 +152,7 @@ function mostrarDetalleNoticia(noticiaId) {
                       </div>
                       
                       <h6 class="card-title">Información del artículo</h6>
-                      <ul class="list-unstyled">
+                      <ul class="list-unstyled" >
                         <li><strong>Autor:</strong> ${noticia.autor}</li>
                         <li><strong>Tiempo de lectura:</strong> ${noticia.tiempoLectura}</li>
                         <li><strong>Categoría:</strong> ${noticia.categoria}</li>

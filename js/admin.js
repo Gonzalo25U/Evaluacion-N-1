@@ -44,6 +44,7 @@ function mostrarOpcionesAdmin() {
 }
 
 
+
 // Ocultar opciones admin
 function ocultarOpcionesAdmin() {
   const btnAdminPanel = document.getElementById('btnAdminPanel');
@@ -127,6 +128,7 @@ function mostrarPanelAdmin() {
 }
 
 
+
 // CRUD Usuarios
 function mostrarListaUsuarios() {
   // Tomar todos los usuarios: admin inicial + registrados
@@ -171,7 +173,7 @@ function mostrarListaUsuarios() {
   document.getElementById("adminContent").innerHTML = listaHTML;
 }
 
-
+// Crear nuevo usuario
 function crearUsuario() {
   const nombre = prompt("Nombre del usuario:");
   const email = prompt("Email:");
@@ -185,7 +187,7 @@ function crearUsuario() {
   localStorage.setItem("usuarios", JSON.stringify(usuarios));
   mostrarListaUsuarios();
 }
-
+// Editar usuario
 function editarUsuario(index) {
   let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
   const u = usuarios[index];
@@ -200,7 +202,7 @@ function editarUsuario(index) {
   localStorage.setItem("usuarios", JSON.stringify(usuarios));
   mostrarListaUsuarios();
 }
-
+// Eliminar usuario
 function eliminarUsuario(index) {
   let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
   const u = usuarios[index];
@@ -215,6 +217,7 @@ function eliminarUsuario(index) {
   localStorage.setItem("usuarios", JSON.stringify(usuarios));
   mostrarListaUsuarios();
 }
+
 
 
 // CRUD Juegos
@@ -252,7 +255,7 @@ function mostrarListaJuegos() {
 
   document.getElementById("adminContent").innerHTML = listaHTML;
 }
-
+// crear juego
 function crearJuego() {
   const nombre = prompt("Nombre del juego:");
   const precio = parseFloat(prompt("Precio:"));
@@ -263,7 +266,7 @@ function crearJuego() {
   localStorage.setItem("juegos", JSON.stringify(juegos));
   mostrarListaJuegos();
 }
-
+// editar juego
 function editarJuego(index) {
   let juegos = JSON.parse(localStorage.getItem("juegos")) || [];
   const j = juegos[index];
@@ -276,7 +279,7 @@ function editarJuego(index) {
   localStorage.setItem("juegos", JSON.stringify(juegos));
   mostrarListaJuegos();
 }
-
+// eliminar juego
 function eliminarJuego(index) {
   if (!confirm("¿Deseas eliminar este juego?")) return;
   let juegos = JSON.parse(localStorage.getItem("juegos")) || [];
