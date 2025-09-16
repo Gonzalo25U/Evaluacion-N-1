@@ -232,3 +232,9 @@ body {
   transform: scale(1.2);
   filter: brightness(1.5);
 }
+.row g-4{
+  color: red;
+}
+.card.game-card .card-body {
+  color: #ffffff !important;
+}
